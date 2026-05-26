@@ -683,6 +683,37 @@
   .pod:hover { transform: translateY(-6px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
   .pod-1:hover { box-shadow: 0 12px 40px rgba(0,201,177,0.15); }
 
+  /* Code copy box on sponsor cards */
+  .code-copy-row {
+    margin-bottom: 12px;
+  }
+  .code-copy-box {
+    display: flex; align-items: center;
+    background: var(--bg);
+    border: 1px solid rgba(0,201,177,0.25);
+    border-radius: 7px;
+    overflow: hidden;
+  }
+  .code-copy-value {
+    flex: 1; padding: 8px 12px;
+    font-family: 'Inter', monospace;
+    font-size: 0.88rem; font-weight: 700;
+    color: var(--teal); letter-spacing: 0.06em;
+  }
+  .code-copy-btn {
+    background: var(--teal-dim);
+    border: none; border-left: 1px solid rgba(0,201,177,0.25);
+    color: var(--teal);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.65rem; font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 8px 10px; cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .code-copy-btn:hover { background: var(--teal); color: #000; }
+  .code-copy-btn.copied { background: #22c55e; color: #000; }
+
   /* Sponsor logo img */
   .sponsor-logo-img {
     height: 36px;
@@ -861,6 +892,7 @@
           <a href="https://go.duelbits.io/visit/?bta=37793&nci=5867&campaign=3ec59ded-3468-4c1e-aeb2-8362ea5be6f6" class="btn btn-fill" style="display:inline-block;">Claim Now</a>
         </div>
         <div class="bonus-big">
+          <div class="bonus-big-emoji">🌟</div>
           <div class="bonus-big-num">250</div>
           <div class="bonus-big-label">Max Free Spins</div>
         </div>
@@ -1101,8 +1133,8 @@
   }
 
   // ── COPY CODE ───────────────────────────────
-  function copyCode(btn) {
-    navigator.clipboard.writeText('obtain').then(() => {
+  function copyCode(btn, value) {
+    navigator.clipboard.writeText(value || 'obtain').then(() => {
       btn.textContent = 'Copied ✓';
       btn.classList.add('copied');
       setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
@@ -1115,7 +1147,7 @@
   const API_TOKEN    = 'M2VjNTlkZWQtMzQ2OC00YzFlLWFlYjItODM2MmVhNWJlNmY2OjEyMjYyNjIwMDM1OWFjNWFlZThjOWQ0NDIwN2MwNWNm';
   const REFRESH_MS   = 5 * 60 * 1000;
 
-  const PRIZES = { 1:'$1,000',2:'$750',3:'$350',4:'$175',5:'$100',6:'$60',7:'$35',8:'$20',9:'$10',10:'$10' };
+  const PRIZES = { 1:'$1,000',2:'$750',3:'$350',4:'$150',5:'$85',6:'$50',7:'$40',8:'$30',9:'$25',10:'$20' };
 
   // ── HELPERS ─────────────────────────────────
   function monthRange() {
