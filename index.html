@@ -1151,10 +1151,9 @@
 
   // ── HELPERS ─────────────────────────────────
   function monthRange() {
-    const n = new Date();
     return {
-      start: new Date(n.getFullYear(), n.getMonth(), 1).toISOString(),
-      end:   new Date(n.getFullYear(), n.getMonth()+1, 0, 23, 59, 59).toISOString()
+      start: '2026-05-01T00:00:00.000Z',
+      end:   '2026-06-30T23:59:59.000Z'
     };
   }
   function fmtPts(n) {
@@ -1249,9 +1248,8 @@
 
   // ── COUNTDOWN ───────────────────────────────
   function updateCountdown() {
-    const n = new Date();
-    const end = new Date(n.getFullYear(), n.getMonth()+1, 1);
-    const diff = end - n;
+    const end = new Date('2026-07-01T00:00:00.000Z');
+    const diff = end - new Date();
     if (diff <= 0) return;
     document.getElementById('cd-days').textContent  = String(Math.floor(diff/86400000)).padStart(2,'0');
     document.getElementById('cd-hours').textContent = String(Math.floor((diff%86400000)/3600000)).padStart(2,'0');
