@@ -17,6 +17,9 @@
     --teal-dim: rgba(0,201,177,0.1);
     --teal-glow:rgba(0,201,177,0.2);
     --teal2:    #00e5cc;
+    --gold:     #f5c842;
+    --gold-dim: rgba(245,200,66,0.08);
+    --gold-glow:rgba(245,200,66,0.22);
     --text:     #e2e8f0;       /* brighter body text */
     --muted:    #64748b;       /* more visible mid-gray */
     --subtle:   #334155;       /* dark muted for de-emphasis */
@@ -363,6 +366,56 @@
     border: 1px solid var(--border);
     padding: 4px 10px; border-radius: 5px;
   }
+
+  /* ─── VIP ─── */
+  .vip-card {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1.55fr 1fr;
+    background: var(--card);
+    border: 1px solid rgba(245,200,66,0.25);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .vip-card::before {
+    content: '';
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 65% 90% at 100% 0%, var(--gold-dim) 0%, transparent 60%);
+  }
+  .vip-card-main { padding: 40px; position: relative; z-index: 1; }
+  .vip-crown { font-size: 1.9rem; margin-bottom: 14px; animation: float 3s ease-in-out infinite; }
+  .vip-card-main h3 {
+    font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700;
+    color: var(--white); margin-bottom: 12px; letter-spacing: 0;
+  }
+  .vip-card-main > p {
+    font-size: 0.92rem; color: #7a8fa6; line-height: 1.75;
+    margin-bottom: 28px; max-width: 480px;
+  }
+  .vip-perks { display: flex; flex-direction: column; gap: 18px; }
+  .vip-perk { display: flex; gap: 14px; align-items: flex-start; }
+  .vip-perk-icon { font-size: 1.15rem; flex-shrink: 0; margin-top: 1px; }
+  .vip-perk-title { font-size: 0.9rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .vip-perk-desc { font-size: 0.84rem; color: #7a8fa6; line-height: 1.6; }
+  .vip-card-apply {
+    background: linear-gradient(160deg, rgba(245,200,66,0.07), rgba(245,200,66,0.015));
+    border-left: 1px solid rgba(245,200,66,0.2);
+    padding: 40px 36px;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; z-index: 1;
+  }
+  .vip-apply-label {
+    font-family: 'Syne', sans-serif; font-size: 1.05rem; font-weight: 700; color: var(--white);
+    margin-bottom: 4px; letter-spacing: 0;
+  }
+  .vip-apply-sub { font-size: 0.84rem; color: #7a8fa6; line-height: 1.6; margin-bottom: 20px; }
+  .btn-vip {
+    background: var(--gold); color: #000;
+    width: 100%; text-align: center;
+    margin-bottom: 10px;
+  }
+  .btn-vip:hover { background: #ffd75e; box-shadow: 0 0 24px var(--gold-glow); transform: translateY(-1px); }
+  .vip-card-apply .btn-outline { width: 100%; text-align: center; }
 
   /* ─── LEADERBOARD ─── */
   .lb-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; gap: 16px; }
@@ -783,6 +836,8 @@
     .nav-links { display: none; }
     .steps { grid-template-columns: 1fr; }
     .bonus-grid, .sponsor-grid { grid-template-columns: 1fr; }
+    .vip-card { grid-template-columns: 1fr; }
+    .vip-card-apply { border-left: none; border-top: 1px solid rgba(245,200,66,0.2); }
     .bonus-card.wide { grid-column: span 1; grid-template-columns: 1fr; }
     .formula-examples { grid-template-columns: 1fr; }
     .podium { grid-template-columns: 1fr; }
@@ -804,6 +859,7 @@
   <div class="nav-links">
     <a href="#how">How It Works</a>
     <a href="#bonuses">Bonuses</a>
+    <a href="#vip">VIP</a>
     <a href="#leaderboard">Leaderboard</a>
     <a href="#community">Community</a>
     <a href="https://record.dbpartners.io/_EJ98ETgor6nUOsjNOfgKeWNd7ZgqdRLk/1/" class="nav-cta">Play Now</a>
@@ -927,6 +983,53 @@
           <div class="feat">Community Exclusive Drops</div>
         </div>
         <a href="https://record.dbpartners.io/_EJ98ETgor6nUOsjNOfgKeWNd7ZgqdRLk/1/" class="btn btn-outline" style="display:inline-block;">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIP -->
+<section class="section" id="vip">
+  <div class="container">
+    <div class="section-header">
+      <div class="eyebrow">By Application</div>
+      <h2 class="section-heading"><span class="ul">VIP Program</span></h2>
+      <p class="section-sub">For players who wager at a different level. Reviewed individually — not a fixed public tier.</p>
+    </div>
+    <div class="vip-card">
+      <div class="vip-card-main">
+        <div class="vip-crown">👑</div>
+        <h3>Play seriously? Get treated like it.</h3>
+        <p>High-volume depositors get a direct line, not a queue. Every application is reviewed personally based on deposit and wager history — there's no public threshold, so the only way to find out is to reach out.</p>
+        <div class="vip-perks">
+          <div class="vip-perk">
+            <span class="vip-perk-icon">🤝</span>
+            <div>
+              <div class="vip-perk-title">Dedicated contact</div>
+              <div class="vip-perk-desc">A direct line to us, not a generic support ticket.</div>
+            </div>
+          </div>
+          <div class="vip-perk">
+            <span class="vip-perk-icon">⚡</span>
+            <div>
+              <div class="vip-perk-title">Priority withdrawals</div>
+              <div class="vip-perk-desc">Faster payouts, handled personally when it matters.</div>
+            </div>
+          </div>
+          <div class="vip-perk">
+            <span class="vip-perk-icon">🎁</span>
+            <div>
+              <div class="vip-perk-title">Custom bonuses</div>
+              <div class="vip-perk-desc">Reload offers and perks built around how you actually play.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="vip-card-apply">
+        <div class="vip-apply-label">Think you qualify?</div>
+        <p class="vip-apply-sub">Reach out directly and we'll take it from there.</p>
+        <a href="https://discord.gg/gambling" target="_blank" rel="noopener" class="btn btn-vip">Apply on Discord</a>
+        <a href="https://x.com/ObtainDotGG" target="_blank" rel="noopener" class="btn btn-outline">DM on X</a>
       </div>
     </div>
   </div>
@@ -1106,6 +1209,7 @@
       <h4>Quick Links</h4>
       <a href="#how">How It Works</a>
       <a href="#bonuses">Bonuses</a>
+      <a href="#vip">VIP Program</a>
       <a href="#leaderboard">Leaderboard</a>
       <a href="#community">Community</a>
     </div>
