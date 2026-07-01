@@ -419,6 +419,30 @@
   }
 
   /* Status bar */
+  /* ─── LEADERBOARD PAUSED ─── */
+  .lb-paused-overlay {
+    position: relative; z-index: 10;
+    background: linear-gradient(135deg, rgba(0,201,177,0.07), rgba(0,201,177,0.02));
+    border: 1px solid rgba(0,201,177,0.2);
+    border-radius: 12px;
+    padding: 40px 32px;
+    text-align: center;
+    margin-bottom: 16px;
+  }
+  .lb-paused-icon { font-size: 2rem; margin-bottom: 12px; }
+  .lb-paused-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem; font-weight: 700;
+    color: var(--white); margin-bottom: 10px; letter-spacing: 0;
+  }
+  .lb-paused-text {
+    font-size: 0.9rem; color: #7a8fa6; line-height: 1.7;
+    max-width: 480px; margin: 0 auto;
+  }
+  .lb-paused-text a { color: var(--teal); text-decoration: none; font-weight: 600; }
+  .lb-paused-text a:hover { text-decoration: underline; }
+
+  /* ─── STATUS BAR ─── */
   .lb-status {
     display: flex; align-items: center; gap: 8px;
     margin-bottom: 16px;
@@ -1032,13 +1056,22 @@
       <button class="lb-refresh" id="lb-refresh" onclick="fetchLeaderboard()">↻</button>
     </div>
 
-    <div class="podium" id="lb-podium">
+    <!-- PAUSED OVERLAY -->
+    <div class="lb-paused-overlay">
+      <div class="lb-paused-inner">
+        <div class="lb-paused-icon">⏸</div>
+        <div class="lb-paused-title">Leaderboard Paused</div>
+        <div class="lb-paused-text">The competition is temporarily on hold. We'll be back soon — stay tuned on <a href="https://discord.gg/gambling" target="_blank">Discord</a> and <a href="https://x.com/ObtainDotGG" target="_blank">X</a> for updates.</div>
+      </div>
+    </div>
+
+    <div class="podium" id="lb-podium" style="filter:blur(3px); pointer-events:none; user-select:none; opacity:0.35;">
       <div class="pod pod-2 skel" style="height:180px"></div>
       <div class="pod pod-1 skel" style="height:220px"></div>
       <div class="pod pod-3 skel" style="height:160px"></div>
     </div>
 
-    <div class="lb-table">
+    <div class="lb-table" style="filter:blur(3px); pointer-events:none; user-select:none; opacity:0.35;">
       <div class="lb-row hdr">
         <span>Rank</span><span>Player</span><span>Points</span><span style="text-align:right">Prize</span>
       </div>
@@ -1237,8 +1270,11 @@
   }
 
   // ── FETCH ───────────────────────────────────
+  const LEADERBOARD_PAUSED = true; // set to false to re-enable
+
   let timer = null;
   async function fetchLeaderboard() {
+    if (LEADERBOARD_PAUSED) return; // don't fetch when paused
     const btn = document.getElementById('lb-refresh');
     btn.classList.add('spin');
     setStatus('Fetching live data…', '');
